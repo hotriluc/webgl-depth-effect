@@ -1,0 +1,21 @@
+.slider {
+  display: flex;
+  flex-direction: column;
+  // gap: 10rem;
+}
+
+.slide {
+  display: flex;
+  height: 100vh;
+}
+
+.figure {
+  height: 100%;
+  width: 100%;
+
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+}

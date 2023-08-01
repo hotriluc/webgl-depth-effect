@@ -1,12 +1,12 @@
 import { Canvas } from '@react-three/fiber';
-import Overlay from './components/overlay/Overlay';
 import Scene from './components/scene/Scene';
+import Slider from './components/overlay/Slider';
 
 const App = () => {
   return (
     <>
-      <Overlay />
-      <Canvas camera={{ position: [0, 0, 5] }}>
+      <Slider />
+      <Canvas className="canvas" camera={{ position: [0, 0, 5] }}>
         <Scene />
       </Canvas>
     </>

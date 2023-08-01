@@ -22,13 +22,18 @@ declare module '@react-three/fiber' {
   }
 }
 
-const Plane = () => {
+interface ISlideProps {
+  position: THREE.Vector3 | [x: number, y: number, z: number];
+  scale: THREE.Vector3 | [x: number, y: number, z: number];
+}
+
+const Slide = ({ position, scale }: ISlideProps) => {
   return (
-    <mesh>
+    <mesh position={position} scale={scale}>
       <planeGeometry />
       <sketchMaterial />
     </mesh>
   );
 };
 
-export default Plane;
+export default Slide;
