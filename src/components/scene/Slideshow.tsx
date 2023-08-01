@@ -24,6 +24,7 @@ const Slideshow = () => {
         return (
           <Slide
             key={i}
+            img={img?.src || '/blossom.webp'}
             scale={[scaleX, scaleY, 0]}
             position={[
               -(viewport.width / 2) + scaleX / 2 + offsetX,

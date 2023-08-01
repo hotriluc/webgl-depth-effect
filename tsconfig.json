@@ -22,7 +22,7 @@
 
     "types": ["vite-plugin-glsl/ext"]
   },
-
+  "typeRoots": ["src/types/custom.d.ts"],
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

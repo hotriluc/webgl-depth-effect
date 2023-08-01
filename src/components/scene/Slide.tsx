@@ -1,35 +1,30 @@
 import * as THREE from 'three';
 
-import { shaderMaterial } from '@react-three/drei';
-import sketchShaderFragment from '../../shaders/sketch/fragment.glsl';
-import sketchShaderVertex from '../../shaders/sketch/vertex.glsl';
+import { useRef } from 'react';
+import { extend, useFrame, useLoader } from '@react-three/fiber';
 
-import { Object3DNode, extend } from '@react-three/fiber';
+import { SketchMaterial, SketchMaterialRef } from '../materials/SketchMaterial';
 
-const SketchMaterial = shaderMaterial(
-  {
-    u_time: 0,
-    u_resolution: new THREE.Vector2(1.0, 1.0),
-  },
-  sketchShaderVertex,
-  sketchShaderFragment
-);
 extend({ SketchMaterial });
 
-declare module '@react-three/fiber' {
-  interface ThreeElements {
-    sketchMaterial: Object3DNode<THREE.ShaderMaterial, typeof SketchMaterial>;
-  }
-}
-
 interface ISlideProps {
+  img: string;
   position: THREE.Vector3 | [x: number, y: number, z: number];
   scale: THREE.Vector3 | [x: number, y: number, z: number];
 }
 
-const Slide = ({ position, scale }: ISlideProps) => {
+const Slide = ({ img, position, scale }: ISlideProps) => {
+  const imgTexture = useLoader(THREE.TextureLoader, img);
+  const ref = useRef<THREE.Mesh<THREE.PlaneGeometry, SketchMaterialRef>>(null);
+
+  useFrame(() => {
+    if (ref.current) {
+      ref.current.material.u_texture = imgTexture;
+    }
+  });
+
   return (
-    <mesh position={position} scale={scale}>
+    <mesh ref={ref} position={position} scale={scale}>
       <planeGeometry />
       <sketchMaterial />
     </mesh>
