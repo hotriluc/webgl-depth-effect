@@ -1,4 +1,4 @@
-import { SketchMaterialImpl } from '../components/scene/SlideMaterial';
+import { SketchMaterialImpl } from '../components/materials/SketchMaterial';
 
 declare global {
   namespace JSX {
