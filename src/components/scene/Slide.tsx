@@ -8,18 +8,23 @@ import { SketchMaterial, SketchMaterialRef } from '../materials/SketchMaterial';
 extend({ SketchMaterial });
 
 interface ISlideProps {
-  img: string;
+  img: HTMLImageElement;
   position: THREE.Vector3 | [x: number, y: number, z: number];
   scale: THREE.Vector3 | [x: number, y: number, z: number];
 }
 
 const Slide = ({ img, position, scale }: ISlideProps) => {
-  const imgTexture = useLoader(THREE.TextureLoader, img);
+  const imgTexture = useLoader(THREE.TextureLoader, img.src);
   const ref = useRef<THREE.Mesh<THREE.PlaneGeometry, SketchMaterialRef>>(null);
 
   useFrame(() => {
     if (ref.current) {
-      ref.current.material.u_texture = imgTexture;
+      ref.current.material.uMap = imgTexture;
+      ref.current.material.uImageSize?.set(img.naturalWidth, img.naturalHeight);
+      ref.current.material.uPlaneSize?.set(
+        ref.current.scale.x,
+        ref.current.scale.y
+      );
     }
   });
 

@@ -13,7 +13,7 @@ const Slideshow = () => {
         const img = el.querySelector('img');
         const bounds = img?.getBoundingClientRect();
 
-        if (!bounds) return;
+        if (!img || !bounds) return;
 
         const scaleX = (viewport.width * bounds.width) / size.width;
         const offsetX = (bounds.left * viewport.width) / size.width;
@@ -24,7 +24,7 @@ const Slideshow = () => {
         return (
           <Slide
             key={i}
-            img={img?.src || '/blossom.webp'}
+            img={img}
             scale={[scaleX, scaleY, 0]}
             position={[
               -(viewport.width / 2) + scaleX / 2 + offsetX,

@@ -4,13 +4,13 @@ import classes from './Slider.module.scss';
 
 const slides = [
   {
-    img: '/blossom.webp',
+    img: '/1.jpeg',
   },
   {
-    img: '/blossom.webp',
+    img: '/1.jpeg',
   },
   {
-    img: '/blossom.webp',
+    img: '/1.jpeg',
   },
 ];
 
