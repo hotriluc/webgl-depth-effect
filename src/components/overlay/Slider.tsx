@@ -2,43 +2,31 @@ import { useEffect } from 'react';
 import { useGallery } from '../../store/useGallery';
 import classes from './Slider.module.scss';
 
-const slides = [
-  {
-    img: '/1.jpeg',
-  },
-  {
-    img: '/1.jpeg',
-  },
-  {
-    img: '/1.jpeg',
-  },
-];
-
 const Slider = () => {
-  const { setDomFigures } = useGallery();
+  const { slides, setDomSlides } = useGallery();
 
   useEffect(() => {
     const figures = document.querySelectorAll('figure');
-    setDomFigures(Array.from(figures));
-  }, [setDomFigures]);
+    setDomSlides(Array.from(figures));
+  }, [setDomSlides]);
 
   return (
     <div className={classes.slider}>
       <section className={classes.slide}>
         <figure className={classes.figure}>
-          <img src={slides[0].img} alt="" />
+          <img src={slides[0].imgUrl} alt="" />
         </figure>
       </section>
 
       <section className={classes.slide}>
         <figure className={classes.figure}>
-          <img src={slides[0].img} alt="" />
+          <img src={slides[0].imgUrl} alt="" />
         </figure>
       </section>
 
       <section className={classes.slide}>
         <figure className={classes.figure}>
-          <img src={slides[0].img} alt="" />
+          <img src={slides[0].imgUrl} alt="" />
         </figure>
       </section>
     </div>

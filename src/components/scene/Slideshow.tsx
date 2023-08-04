@@ -4,13 +4,13 @@ import { useGallery } from '../../store/useGallery';
 import Slide from './Slide';
 
 const Slideshow = () => {
-  const { domFigures } = useGallery();
+  const { slides, domSlides } = useGallery();
   const { viewport, size } = useThree();
 
   return (
     <>
-      {domFigures.map((el, i) => {
-        const img = el.querySelector('img');
+      {slides.map((slide, i) => {
+        const img = domSlides[i].querySelector('img');
         const bounds = img?.getBoundingClientRect();
 
         if (!img || !bounds) return;
@@ -24,8 +24,11 @@ const Slideshow = () => {
         return (
           <Slide
             key={i}
-            img={img}
-            scale={[scaleX, scaleY, 0]}
+            imgUrl={slide.imgUrl}
+            depthUrl={slide.depthMapUrl}
+            threshold={slide.threshold}
+            imgSize={{ width: img.naturalWidth, height: img.naturalHeight }}
+            scale={[scaleX, scaleY, 1]}
             position={[
               -(viewport.width / 2) + scaleX / 2 + offsetX,
               viewport.height / 2 - scaleY / 2 - offsetY,

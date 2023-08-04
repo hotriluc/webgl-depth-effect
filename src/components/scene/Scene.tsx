@@ -1,9 +1,12 @@
+import { OrbitControls } from '@react-three/drei';
+
 import Slideshow from './Slideshow';
 
 const Scene = () => {
   return (
     <>
-      <Slideshow></Slideshow>
+      <OrbitControls />
+      <Slideshow />
     </>
   );
 };
