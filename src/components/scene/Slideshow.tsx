@@ -11,7 +11,7 @@ const Slideshow = () => {
 
   return (
     <>
-      {slides.map((slide, i) => {
+      {domSlides.map((_, i) => {
         const img = domSlides[i].querySelector('img');
         const bounds = img?.getBoundingClientRect();
 
@@ -23,12 +23,15 @@ const Slideshow = () => {
         const scaleY = (viewport.height * bounds.height) / size.height;
         const offsetY = (bounds.top * viewport.height) / size.height;
 
+        // const isCurrentRow = currentSlide === Math.floor(i / 2);
+        // console.log(i, isCurrentRow);
+
         return (
           <Slide
             key={i}
-            imgUrl={slide.imgUrl}
-            depthUrl={slide.depthMapUrl}
-            threshold={slide.threshold}
+            imgUrl={slides[i].imgUrl}
+            depthUrl={slides[i].depthMapUrl}
+            threshold={slides[i].threshold}
             imgSize={{ width: img.naturalWidth, height: img.naturalHeight }}
             scale={[scaleX, scaleY, 1]}
             position={[

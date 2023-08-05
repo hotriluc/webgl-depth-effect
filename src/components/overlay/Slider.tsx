@@ -4,7 +4,7 @@ import classes from './Slider.module.scss';
 import { ISlide } from '../../interfaces/Slide.interface';
 
 const Slider = () => {
-  const { slides, cols, rows, setDomSlides, nextSlide, prevSlide } =
+  const { slides, dimension, setDomSlides, nextSlide, prevSlide } =
     useGallery();
 
   useEffect(() => {
@@ -13,9 +13,9 @@ const Slider = () => {
   }, [setDomSlides]);
 
   const slideGrid = useMemo(() => {
-    const arr: ISlide[][] = new Array(rows)
+    const arr: ISlide[][] = new Array(dimension.rows)
       .fill([])
-      .map(() => new Array(cols).fill([]));
+      .map(() => new Array(dimension.cols).fill([]));
 
     let row = 0;
     let col = 0;
@@ -25,20 +25,20 @@ const Slider = () => {
 
       // If the element last in the row then move to the new
       // otherwise move to another el in the row
-      if ((col + 1) % cols === 0) {
+      if ((col + 1) % dimension.cols === 0) {
         row += 1;
         col = 0;
       } else {
         col++;
       }
 
-      if (row >= rows) {
+      if (row >= dimension.rows) {
         break;
       }
     }
 
     return arr;
-  }, [slides, cols, rows]);
+  }, [slides, dimension]);
 
   return (
     <div className={classes.slider}>

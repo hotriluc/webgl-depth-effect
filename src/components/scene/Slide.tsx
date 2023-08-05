@@ -64,6 +64,12 @@ const Slide = ({
         ref.current.scale.y
       );
 
+      // ref.current.scale.y = lerp(
+      //   ref.current.scale.y,
+      //   currentSlide ? scale[1] : 0,
+      //   0.01
+      // );
+
       ref.current.material.uMouse?.set(current.x, current.y);
       ref.current.material.uThreshold?.set(
         threshold.horizontal,

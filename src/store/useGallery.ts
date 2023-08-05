@@ -53,27 +53,30 @@ const slides: Array<ISlide> = [
 interface GalleryState {
   slides: Array<ISlide>;
   domSlides: Array<HTMLElement>;
-  rows: number;
-  cols: number;
+  dimension: { rows: number; cols: number };
   currentSlide: number;
   prevSlide: () => void;
   nextSlide: () => void;
   setDomSlides: (list: Array<HTMLElement>) => void;
+  setDimension: (rows: number, cols: number) => void;
 }
 
 export const useGallery = create<GalleryState>((set) => ({
   slides: slides,
-  rows: 3,
-  cols: 3,
+  dimension: { rows: 3, cols: 3 },
+  setDimension: (rows: number, cols: number) =>
+    set(() => ({
+      dimension: { rows, cols },
+    })),
   domSlides: [],
   setDomSlides: (list) => set({ domSlides: list }),
   currentSlide: 0,
   prevSlide: () =>
     set((state: GalleryState) => ({
-      currentSlide: mod(state.currentSlide - 1, state.rows),
+      currentSlide: mod(state.currentSlide - 1, state.dimension.rows),
     })),
   nextSlide: () =>
     set((state: GalleryState) => ({
-      currentSlide: mod(state.currentSlide + 1, state.rows),
+      currentSlide: mod(state.currentSlide + 1, state.dimension.rows),
     })),
 }));
