@@ -7,6 +7,7 @@
 .slide {
   display: flex;
   height: 100vh;
+  position: relative;
 }
 
 .figure {
@@ -18,5 +19,44 @@
     object-fit: cover;
     height: 100%;
     width: 100%;
+  }
+}
+
+.buttons {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  z-index: 100;
+  display: flex;
+  gap: 2rem;
+}
+
+.button {
+  top: 0;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  border: none;
+  background-color: transparent;
+  position: relative;
+
+  cursor: pointer;
+
+  &::after {
+    background: currentColor;
+    bottom: 0;
+    content: '';
+    height: 1px;
+    left: 0;
+    position: absolute;
+    transition: transform 0.4s ease;
+    width: 100%;
+
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
   }
 }

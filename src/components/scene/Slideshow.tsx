@@ -7,6 +7,8 @@ const Slideshow = () => {
   const { slides, domSlides } = useGallery();
   const { viewport, size } = useThree();
 
+  const { currentSlide } = useGallery();
+
   return (
     <>
       {slides.map((slide, i) => {
@@ -31,7 +33,10 @@ const Slideshow = () => {
             scale={[scaleX, scaleY, 1]}
             position={[
               -(viewport.width / 2) + scaleX / 2 + offsetX,
-              viewport.height / 2 - scaleY / 2 - offsetY,
+              viewport.height / 2 -
+                scaleY / 2 -
+                offsetY +
+                viewport.height * currentSlide,
               0,
             ]}
           />

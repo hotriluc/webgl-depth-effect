@@ -3,11 +3,9 @@ import { useGallery } from '../../store/useGallery';
 import classes from './Slider.module.scss';
 import { ISlide } from '../../interfaces/Slide.interface';
 
-const rows = 3;
-const cols = 3;
-
 const Slider = () => {
-  const { slides, setDomSlides } = useGallery();
+  const { slides, cols, rows, setDomSlides, nextSlide, prevSlide } =
+    useGallery();
 
   useEffect(() => {
     const figures = document.querySelectorAll('figure');
@@ -40,10 +38,30 @@ const Slider = () => {
     }
 
     return arr;
-  }, [slides]);
+  }, [slides, cols, rows]);
 
   return (
     <div className={classes.slider}>
+      <nav className={classes.buttons}>
+        <button
+          className={classes.button}
+          onClick={() => {
+            prevSlide();
+          }}
+        >
+          prev
+        </button>
+
+        <button
+          className={classes.button}
+          onClick={() => {
+            nextSlide();
+          }}
+        >
+          next
+        </button>
+      </nav>
+
       {slideGrid.map((row, rowIndex) => (
         <section key={`slide-row-${rowIndex}`} className={classes.slide}>
           {row.map((el, index) => (

@@ -1,11 +1,7 @@
 import { create } from 'zustand';
 import { ISlide } from '../interfaces/Slide.interface';
+import { mod } from '../utils/math';
 
-interface GalleryState {
-  slides: Array<ISlide>;
-  domSlides: Array<HTMLElement>;
-  setDomSlides: (list: Array<HTMLElement>) => void;
-}
 const slides: Array<ISlide> = [
   {
     imgUrl: '/1.jpg',
@@ -54,8 +50,30 @@ const slides: Array<ISlide> = [
   },
 ];
 
+interface GalleryState {
+  slides: Array<ISlide>;
+  domSlides: Array<HTMLElement>;
+  rows: number;
+  cols: number;
+  currentSlide: number;
+  prevSlide: () => void;
+  nextSlide: () => void;
+  setDomSlides: (list: Array<HTMLElement>) => void;
+}
+
 export const useGallery = create<GalleryState>((set) => ({
   slides: slides,
+  rows: 3,
+  cols: 3,
   domSlides: [],
   setDomSlides: (list) => set({ domSlides: list }),
+  currentSlide: 0,
+  prevSlide: () =>
+    set((state: GalleryState) => ({
+      currentSlide: mod(state.currentSlide - 1, state.rows),
+    })),
+  nextSlide: () =>
+    set((state: GalleryState) => ({
+      currentSlide: mod(state.currentSlide + 1, state.rows),
+    })),
 }));
