@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import { clamp } from 'three/src/math/MathUtils.js';
+import { clamp, lerp } from 'three/src/math/MathUtils.js';
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ThreeEvent,
   Vector3,
@@ -26,7 +26,7 @@ interface ISlideProps {
   scale: Vector3;
 }
 
-const maxTilt = 15;
+const maxTilt = 12;
 
 const Slide = ({
   imgUrl,
@@ -39,14 +39,19 @@ const Slide = ({
   const ref = useRef<THREE.Mesh<THREE.PlaneGeometry, SketchMaterialRef>>(null);
 
   const [target, setTarget] = useState<I2DCoords>({ x: 0, y: 0 });
-  const curr = useMemo<I2DCoords>(() => {
-    return { x: target.x, y: target.y };
-  }, [target]);
+  const [current, setCurrent] = useState<I2DCoords>({ x: 0, y: 0 });
 
   const [imgTexture, depthTexture] = useLoader(THREE.TextureLoader, [
     imgUrl,
     depthUrl,
   ]);
+
+  useEffect(() => {
+    const x = lerp(current.x, target.x, 0.1);
+    const y = lerp(current.y, target.y, 0.1);
+
+    setCurrent({ x, y });
+  }, [target]);
 
   useFrame(() => {
     if (ref.current) {
@@ -59,7 +64,7 @@ const Slide = ({
         ref.current.scale.y
       );
 
-      ref.current.material.uMouse?.set(curr.x, curr.y);
+      ref.current.material.uMouse?.set(current.x, current.y);
       ref.current.material.uThreshold?.set(
         threshold.horizontal,
         threshold.vertical

@@ -28,9 +28,9 @@ void main () {
   );
 
   vec4 depth = texture2D(uDepthMap , st );
-  vec2 f = vec2(st.x + (depth.r - 0.5) * uMouse.x / uThreshold.x , st.y +  (depth.r - 0.5) * uMouse.y / uThreshold.y );
-  vec4 image = texture2D(uMap , f );
+  vec2 f = vec2(st.x + (depth.r - 0.5) * uMouse.x / uThreshold.x , st.y + (depth.r - 0.5) * uMouse.y / uThreshold.y );
 
+  vec4 image = texture2D(uMap , mirrored(f) );
   vec3 res = image.rgb ;
 
   gl_FragColor = vec4(res, 1.0);
