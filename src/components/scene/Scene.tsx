@@ -1,12 +1,9 @@
-import { Center } from '@react-three/drei';
-import Plane from './Plane';
+import Slideshow from './Slideshow';
 
 const Scene = () => {
   return (
     <>
-      <Center>
-        <Plane />
-      </Center>
+      <Slideshow />
     </>
   );
 };
