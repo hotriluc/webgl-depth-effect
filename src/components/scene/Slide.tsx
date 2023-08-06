@@ -26,7 +26,7 @@ interface ISlideProps {
   scale: Vector3;
 }
 
-const maxTilt = 12;
+const maxTilt = 15;
 
 const Slide = ({
   imgUrl,
@@ -47,8 +47,8 @@ const Slide = ({
   ]);
 
   useEffect(() => {
-    const x = lerp(current.x, target.x, 0.1);
-    const y = lerp(current.y, target.y, 0.1);
+    const x = lerp(current.x, target.x, 0.05);
+    const y = lerp(current.y, target.y, 0.05);
 
     setCurrent({ x, y });
   }, [target]);
@@ -81,8 +81,8 @@ const Slide = ({
   const onPointerMove = (e: ThreeEvent<PointerEvent>) => {
     const { pointer } = e;
 
+    const x = clamp(pointer.x, -maxTilt, maxTilt) / maxTilt;
     const y = clamp(pointer.y, -maxTilt, maxTilt) / maxTilt;
-    const x = -clamp(pointer.x, -maxTilt, maxTilt) / maxTilt;
 
     setTarget({ x, y });
   };

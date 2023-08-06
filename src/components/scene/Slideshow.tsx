@@ -12,6 +12,8 @@ const Slideshow = () => {
   return (
     <>
       {domSlides.map((_, i) => {
+        if (i > slides.length - 1) return;
+
         const img = domSlides[i].querySelector('img');
         const bounds = img?.getBoundingClientRect();
 
@@ -22,9 +24,6 @@ const Slideshow = () => {
 
         const scaleY = (viewport.height * bounds.height) / size.height;
         const offsetY = (bounds.top * viewport.height) / size.height;
-
-        // const isCurrentRow = currentSlide === Math.floor(i / 2);
-        // console.log(i, isCurrentRow);
 
         return (
           <Slide

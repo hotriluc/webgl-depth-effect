@@ -42,6 +42,7 @@ const Slider = () => {
 
   return (
     <div className={classes.slider}>
+      <h1 className={classes.title}>HANFU</h1>
       <nav className={classes.buttons}>
         <button
           className={classes.button}
