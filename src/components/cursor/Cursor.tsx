@@ -1,5 +1,4 @@
 import classes from './Cursor.module.scss';
-import { motion } from 'framer-motion';
 
 import { useEffect, useState } from 'react';
 
@@ -21,17 +20,12 @@ const Cursor = () => {
   }, []);
 
   return (
-    <motion.div
+    <div
       className={classes.cursor}
-      animate={{
-        x: cursorTarget.x,
-        y: cursorTarget.y,
+      style={{
+        transform: `translate(${cursorTarget.x}px, ${cursorTarget.y}px`,
       }}
-      transition={{
-        ease: [0.33, 1, 0.68, 1],
-        duration: 0.2,
-      }}
-    ></motion.div>
+    ></div>
   );
 };
 
