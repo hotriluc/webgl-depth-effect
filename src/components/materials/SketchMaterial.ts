@@ -20,8 +20,9 @@ type SketchMaterialUniforms = {
 export type SketchMaterialRef = THREE.ShaderMaterial & SketchMaterialUniforms;
 export type SketchMaterialImpl = Object3DNode<
   THREE.ShaderMaterial,
-  typeof THREE.ShaderMaterial & SketchMaterialUniforms
->;
+  typeof THREE.ShaderMaterial
+> &
+  SketchMaterialUniforms;
 
 export const SketchMaterial = shaderMaterial(
   {
